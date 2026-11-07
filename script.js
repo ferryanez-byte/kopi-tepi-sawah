@@ -41,3 +41,26 @@ function hitungOngkir(jarak, subtotal) {
   return 5000 + Math.ceil(jarak - 3) * 2000;
 }
 
+document.getElementById("form-pesan").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const hasil = document.getElementById("hasil");
+  const jarak = parseFloat(document.getElementById("jarak").value);
+  let subtotal = 0, rincian = "";
+  menu.forEach((m, i) => {
+    const q = parseInt(document.getElementById("qty-" + i).value, 10) || 0;
+    if (q > 0) {
+      subtotal += q * m.harga;
+      rincian += `<div class="r"><span>${m.nama} × ${q}</span><span>${rupiah(q * m.harga)}</span></div>`;
+    }
+  });
+  hasil.className = "hasil tampil";
+  if (subtotal === 0) { hasil.classList.add("gagal"); hasil.textContent = "Pilih minimal satu menu dengan jumlah lebih dari 0."; return; }
+  if (isNaN(jarak) || jarak < 0) { hasil.classList.add("gagal"); hasil.textContent = "Isi jarak antar dengan angka 0 atau lebih."; return; }
+  if (jarak > 8) { hasil.classList.add("gagal"); hasil.textContent = "Maaf, jarak " + jarak + " km di luar jangkauan (maksimal 8 km)."; return; }
+  const ongkir = hitungOngkir(jarak, subtotal);
+  hasil.innerHTML = `${rincian}
+    <div class="r"><span>Subtotal</span><span>${rupiah(subtotal)}</span></div>
+    <div class="r"><span>Ongkir (${jarak} km)</span><span>${ongkir === 0 ? "Gratis" : rupiah(ongkir)}</span></div>
+    <div class="r total"><span>Total</span><span>${rupiah(subtotal + ongkir)}</span></div>`;
+});
+
