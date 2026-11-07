@@ -39,6 +39,10 @@ input.salah{border-color:var(--merah)}
 .hasil dl{margin:0}.hasil .r{display:flex;justify-content:space-between;padding:.2rem 0}
 .hasil .total{border-top:2px solid var(--hijau);margin-top:.4rem;padding-top:.5rem;font-weight:700;font-size:1.15rem}
 .dua-kolom{display:grid;grid-template-columns:1fr;gap:2rem}
+.daftar-res{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.daftar-res li{background:#fff;border:1px solid var(--garis);border-radius:8px;padding:.7rem 1rem;display:flex;justify-content:space-between;gap:.75rem;align-items:center}
+.kosong{color:#4b5a47;font-style:italic}
+.hapus{background:#fff;color:var(--merah);border:1px solid var(--merah);border-radius:6px;padding:.35rem .7rem;cursor:pointer;font-size:.9rem}
 address{font-style:normal}
 table{border-collapse:collapse;width:100%}th,td{text-align:left;padding:.4rem .5rem;border-bottom:1px solid var(--garis)}
 .footer{background:var(--hijau-tua);color:#e8efe2;padding:1.2rem 0;font-size:.9rem}.footer p{margin:0}

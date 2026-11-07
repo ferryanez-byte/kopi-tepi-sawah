@@ -64,7 +64,6 @@ document.getElementById("form-pesan").addEventListener("submit", (e) => {
     <div class="r total"><span>Total</span><span>${rupiah(subtotal + ongkir)}</span></div>`;
 });
 
-
 // ===== Interaksi 2: reservasi meja =====
 const KUNCI = "reservasi-kopi-tepi-sawah";
 const muat = () => { try { return JSON.parse(localStorage.getItem(KUNCI)) || []; } catch { return []; } };
@@ -82,6 +81,22 @@ function setError(id, pesan) {
   return !pesan;
 }
 
+function render() {
+  const ul = document.getElementById("daftar-reservasi");
+  const data = muat();
+  if (data.length === 0) { ul.innerHTML = '<li class="kosong">Belum ada reservasi.</li>'; return; }
+  ul.innerHTML = data.map((r) => `
+    <li><span><strong>${r.nama}</strong><br>${r.tanggal} · ${r.orang} orang · ${r.wa}</span>
+    <button type="button" class="hapus" data-id="${r.id}" aria-label="Hapus reservasi ${r.nama}">Hapus</button></li>`).join("");
+}
+
+document.getElementById("daftar-reservasi").addEventListener("click", (e) => {
+  const id = e.target.dataset.id;
+  if (!id) return;
+  simpan(muat().filter((r) => String(r.id) !== id));
+  render();
+});
+
 document.getElementById("form-reservasi").addEventListener("submit", (e) => {
   e.preventDefault();
   const nama = document.getElementById("nama").value.trim();
@@ -97,9 +112,13 @@ document.getElementById("form-reservasi").addEventListener("submit", (e) => {
     setError("orang", orangTeks !== "" && Number.isInteger(orang) && orang >= 1 && orang <= 20 ? "" : "Jumlah orang harus 1 sampai 20."),
   ].every(Boolean);
   if (!ok) return;
+
   const data = muat();
   data.push({ id: Date.now(), nama, wa, tanggal, orang });
   simpan(data);
+  render();
   e.target.reset();
   document.getElementById("orang").value = 2;
 });
+
+render();
