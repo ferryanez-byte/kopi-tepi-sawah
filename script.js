@@ -64,3 +64,34 @@ document.getElementById("form-pesan").addEventListener("submit", (e) => {
     <div class="r total"><span>Total</span><span>${rupiah(subtotal + ongkir)}</span></div>`;
 });
 
+
+// ===== Interaksi 2: reservasi meja =====
+function hariIni() {
+  const t = new Date();
+  return `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, "0")}-${String(t.getDate()).padStart(2, "0")}`;
+}
+document.getElementById("tanggal").min = hariIni();
+
+function setError(id, pesan) {
+  document.getElementById("err-" + id).textContent = pesan;
+  document.getElementById(id).classList.toggle("salah", !!pesan);
+  return !pesan;
+}
+
+document.getElementById("form-reservasi").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const nama = document.getElementById("nama").value.trim();
+  const wa = document.getElementById("wa").value.trim();
+  const tanggal = document.getElementById("tanggal").value;
+  const orangTeks = document.getElementById("orang").value.trim();
+  const orang = Number(orangTeks);
+
+  const ok = [
+    setError("nama", nama.length >= 3 ? "" : "Nama minimal 3 huruf."),
+    setError("wa", /^08\d{8,11}$/.test(wa) ? "" : "Nomor harus diawali 08 dan berisi 10-13 angka, tanpa tanda baca."),
+    setError("tanggal", !tanggal ? "Pilih tanggal reservasi." : tanggal < hariIni() ? "Tanggal tidak boleh sudah lewat." : ""),
+    setError("orang", orangTeks !== "" && Number.isInteger(orang) && orang >= 1 && orang <= 20 ? "" : "Jumlah orang harus 1 sampai 20."),
+  ].every(Boolean);
+  if (!ok) return;
+  console.log("Valid:", { nama, wa, tanggal, orang }); // disimpan di tahap berikutnya
+});
