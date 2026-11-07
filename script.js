@@ -20,11 +20,17 @@ function gambar(m) {
 
 // ===== Render menu & baris pesanan =====
 const daftarMenu = document.getElementById("daftar-menu");
+const barisPesan = document.getElementById("baris-pesan");
 menu.forEach((m, i) => {
   daftarMenu.insertAdjacentHTML("beforeend", `
     <article class="kartu">
       <img src="${gambar(m)}" alt="Ilustrasi ${m.nama}, kategori ${m.kategori}" loading="lazy">
       <div><h3>${m.nama}</h3><p class="kat">${m.kategori}</p><p class="harga">${rupiah(m.harga)}</p></div>
     </article>`);
+  barisPesan.insertAdjacentHTML("beforeend", `
+    <div class="baris">
+      <label for="qty-${i}">${m.nama} (${rupiah(m.harga)})</label>
+      <input type="number" id="qty-${i}" min="0" value="0" inputmode="numeric">
+    </div>`);
 });
 

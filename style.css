@@ -36,3 +36,10 @@ input{width:100%;max-width:100%;padding:.6rem;border:1px solid #8aa086;border-ra
 address{font-style:normal}
 table{border-collapse:collapse;width:100%}th,td{text-align:left;padding:.4rem .5rem;border-bottom:1px solid var(--garis)}
 .footer{background:var(--hijau-tua);color:#e8efe2;padding:1.2rem 0;font-size:.9rem}.footer p{margin:0}
+@media(min-width:768px){
+  .bar{flex-direction:row;justify-content:space-between;align-items:center}
+  .hero h1{font-size:2.8rem}
+  .grid-menu{grid-template-columns:repeat(3,1fr)}
+  .dua-kolom{grid-template-columns:1fr 1fr}
+  .baris-pesan{grid-template-columns:1fr 1fr;column-gap:2rem}
+}
