@@ -31,6 +31,85 @@
         <p><a class="tombol" href="#pesan">Hitung pesanan</a> <a class="tombol sekunder" href="#reservasi">Pesan meja</a></p>
       </div>
     </section>
+
+    <section id="menu" class="wrap seksi">
+      <h2>Menu</h2>
+      <div id="daftar-menu" class="grid-menu"></div>
+    </section>
+
+    <section id="pesan" class="seksi alt">
+      <div class="wrap">
+        <h2>Kalkulator pesanan</h2>
+        <p>Isi jumlah tiap menu dan jarak antar. Ongkir gratis untuk subtotal mulai Rp100.000.</p>
+        <form id="form-pesan" novalidate>
+          <fieldset>
+            <legend>Pilih menu</legend>
+            <div id="baris-pesan" class="baris-pesan"></div>
+          </fieldset>
+          <div class="field">
+            <label for="jarak">Jarak antar (km)</label>
+            <input type="number" id="jarak" min="0" step="0.1" inputmode="decimal" value="0">
+          </div>
+          <button type="submit" class="tombol">Hitung</button>
+        </form>
+        <div id="hasil" class="hasil" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="reservasi" class="wrap seksi">
+      <h2>Reservasi meja</h2>
+      <div class="dua-kolom">
+        <div>
+          <h3>Formulir</h3>
+          <form id="form-reservasi" novalidate>
+            <div class="field">
+              <label for="nama">Nama</label>
+              <input type="text" id="nama" autocomplete="name">
+              <p class="error" id="err-nama"></p>
+            </div>
+            <div class="field">
+              <label for="wa">Nomor WhatsApp</label>
+              <input type="text" id="wa" inputmode="numeric" placeholder="081234567890">
+              <p class="error" id="err-wa"></p>
+            </div>
+            <div class="field">
+              <label for="tanggal">Tanggal</label>
+              <input type="date" id="tanggal">
+              <p class="error" id="err-tanggal"></p>
+            </div>
+            <div class="field">
+              <label for="orang">Jumlah orang</label>
+              <input type="number" id="orang" inputmode="numeric" value="2">
+              <p class="error" id="err-orang"></p>
+            </div>
+            <button type="submit" class="tombol">Simpan reservasi</button>
+          </form>
+        </div>
+        <div>
+          <h3>Daftar reservasi</h3>
+          <ul id="daftar-reservasi" class="daftar-res"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="lokasi" class="seksi alt">
+      <div class="wrap dua-kolom">
+        <div>
+          <h2>Lokasi</h2>
+          <address>Jl. Raya Driyorejo, Gresik, Jawa Timur<br>(tepi sawah, sebelah barat jalan utama)</address>
+        </div>
+        <div>
+          <h3>Jam buka</h3>
+          <table>
+            <caption class="sr">Jam buka kedai</caption>
+            <tbody>
+              <tr><th scope="row">Senin - Jumat</th><td>10.00 - 22.00</td></tr>
+              <tr><th scope="row">Sabtu - Minggu</th><td>08.00 - 23.00</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">

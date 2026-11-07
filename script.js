@@ -12,3 +12,19 @@ const warna = { "Kopi": "#6b4a35", "Non-kopi": "#3f7d5c", "Camilan": "#c08a3e" }
 
 const rupiah = (n) => "Rp" + n.toLocaleString("id-ID");
 
+// Gambar ilustrasi SVG (ganti dengan foto asli bila ada)
+function gambar(m) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="400" height="300" fill="${warna[m.kategori]}"/><text x="200" y="185" font-size="110" text-anchor="middle">${ikon[m.kategori]}</text></svg>`;
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+}
+
+// ===== Render menu & baris pesanan =====
+const daftarMenu = document.getElementById("daftar-menu");
+menu.forEach((m, i) => {
+  daftarMenu.insertAdjacentHTML("beforeend", `
+    <article class="kartu">
+      <img src="${gambar(m)}" alt="Ilustrasi ${m.nama}, kategori ${m.kategori}" loading="lazy">
+      <div><h3>${m.nama}</h3><p class="kat">${m.kategori}</p><p class="harga">${rupiah(m.harga)}</p></div>
+    </article>`);
+});
+
