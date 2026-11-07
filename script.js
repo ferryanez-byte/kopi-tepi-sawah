@@ -34,3 +34,10 @@ menu.forEach((m, i) => {
     </div>`);
 });
 
+// ===== Interaksi 1: kalkulator pesanan =====
+function hitungOngkir(jarak, subtotal) {
+  if (subtotal >= 100000) return 0;
+  if (jarak <= 3) return 5000;
+  return 5000 + Math.ceil(jarak - 3) * 2000;
+}
+
