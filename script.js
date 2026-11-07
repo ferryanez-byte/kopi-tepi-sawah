@@ -66,6 +66,10 @@ document.getElementById("form-pesan").addEventListener("submit", (e) => {
 
 
 // ===== Interaksi 2: reservasi meja =====
+const KUNCI = "reservasi-kopi-tepi-sawah";
+const muat = () => { try { return JSON.parse(localStorage.getItem(KUNCI)) || []; } catch { return []; } };
+const simpan = (d) => localStorage.setItem(KUNCI, JSON.stringify(d));
+
 function hariIni() {
   const t = new Date();
   return `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, "0")}-${String(t.getDate()).padStart(2, "0")}`;
@@ -93,5 +97,9 @@ document.getElementById("form-reservasi").addEventListener("submit", (e) => {
     setError("orang", orangTeks !== "" && Number.isInteger(orang) && orang >= 1 && orang <= 20 ? "" : "Jumlah orang harus 1 sampai 20."),
   ].every(Boolean);
   if (!ok) return;
-  console.log("Valid:", { nama, wa, tanggal, orang }); // disimpan di tahap berikutnya
+  const data = muat();
+  data.push({ id: Date.now(), nama, wa, tanggal, orang });
+  simpan(data);
+  e.target.reset();
+  document.getElementById("orang").value = 2;
 });
